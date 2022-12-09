@@ -37,16 +37,9 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TELEGRAM_API_TOKEN).build()
-    
     echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
-
     application.add_handler(CommandHandler('start', start))
     application.add_handler(CommandHandler('end', end))
-
     application.add_handler(echo_handler)
 
     application.run_polling()
-
-  
-  
-# updater.dispatcher.add_handler(CommandHandler('start', start)
