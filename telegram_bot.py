@@ -1,18 +1,4 @@
-# from telegram.ext.updater import Updater
-# from telegram.update import Update
-# from telegram.ext.callbackcontext import CallbackContext
-# from telegram.ext.commandhandler import CommandHandler
-# from telegram.ext.messagehandler import MessageHandler
-# from telegram.ext.filters import Filters
 import os
-import logging
-from telegram import Update
-from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
-
-TELEGRAM_API_TOKEN = os.getenv("TELEGRAM_API_TOKEN")
-
-  
-
 import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler, filters
@@ -23,8 +9,11 @@ logging.basicConfig(
     level=logging.INFO
 )
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    
+TELEGRAM_API_TOKEN = os.getenv("TELEGRAM_API_TOKEN")
+count = 0
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE, count = 0):
+    count +=1
+    logging.info('User Number: '+ str(count) + ' - ' + update.effective_user.first_name)
     await context.bot.send_message(chat_id=update.effective_chat.id, text="Hello "+ update.effective_user.first_name + ", I have been waiting for you!")
 
 async def end(update: Update, context: ContextTypes.DEFAULT_TYPE):
